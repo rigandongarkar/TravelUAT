@@ -76,3 +76,4 @@ class Test_PHPTravels(Base_Class):
 
         search_hotels_result = self.driver.find_element(By.XPATH, "//div[@class='breadcrumb-wrap']/div/div/div[2]/div/ul/li").text
         assert "Total" in search_hotels_result
+        # test case ends here
