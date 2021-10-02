@@ -12,3 +12,6 @@
 2021-09-27 00:00:24,537 : DEBUG : test_flight_booking_flow : People count including Childs : 4
 2021-09-27 00:02:19,143 : DEBUG : test_flight_booking_flow : Room count : 2
 2021-09-27 00:02:19,336 : DEBUG : test_flight_booking_flow : People count including Childs : 4
+2021-10-02 11:46:02,688 : DEBUG : test_flight_booking_flow : Room count : 2
+2021-10-02 11:46:02,925 : DEBUG : test_flight_booking_flow : People count including Childs : 4
+2021-10-02 11:46:06,094 : DEBUG : test_flight_booking_flow : Passed

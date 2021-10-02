@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
-import XLUtils
+from PageObjects.FlightBookObjects import FlightBook
 from framework.BaseClass import Base_Class
 
 
@@ -13,13 +13,10 @@ class Test_PHPTravels(Base_Class):
 
     def test_flight_booking_flow(self):
         log = self.getlogger()
-        self.driver.find_element_by_xpath("//span[@id='select2-hotels_city-container']").click()
-        path = "C:\\Users\\rigan\\PycharmProjects\\travelTest\\destination.xlsx"
-        rows = XLUtils.getRowCount(path, 'Sheet1')
-        for r in range(3, rows+1):
-            destination = XLUtils.readData(path, 'Sheet1', r, 1)
-            self.driver.find_element_by_xpath("//input[@class='select2-search__field']").send_keys(destination)
-            break
+        flightBook_Object = FlightBook(self.driver)
+        flightBook_Object.HotelSeachClick().click()
+
+        flightBook_Object.Location().send_keys("dubai")
         self.driver.find_element_by_xpath("//*[contains(@class,'select2-results__option--highlighted')]").click()
         self.driver.find_element_by_xpath("//input[@id='checkin']").click()
         wait = WebDriverWait(self.driver, 10)
@@ -82,7 +79,7 @@ class Test_PHPTravels(Base_Class):
 
         search_hotels_result = self.driver.find_element(By.XPATH, "//div[@class='breadcrumb-wrap']/div/div/div[2]/div/ul/li").text
         if "Total" in search_hotels_result:
-            XLUtils.writeData(path, 'Sheet1', 1, 2, "Passed")
+            log.debug("Passed : Hotels Found" + search_hotels_result)
         else:
-            XLUtils.writeData(path, 'Sheet1', 1, 2, "Failed")
+            log.debug("No Hotel Found")
         # test case ends here
