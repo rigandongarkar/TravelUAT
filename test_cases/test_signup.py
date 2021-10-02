@@ -6,6 +6,7 @@ from framework.BaseClass import Base_Class
 class Test_SignUp(Base_Class):
 
     def test_SignupUsers(self):
+        logSignup = self.getlogger()
         SignUp_Object = SignupObjectClass(self.driver)
         SignUp_Object.SignUp_ButtonClick().click()
         path = "C:\\Users\\rigan\\PycharmProjects\\travelTest\\Signupusers.xlsx"
@@ -28,8 +29,10 @@ class Test_SignUp(Base_Class):
             SignUp_SuccessText = SignUp_Object.FinalSuccessTextMessage().text
             if "successfull" in SignUp_SuccessText:
                 XLUtils.writeData(path, "Sheet1", r, 6, "Signup is Successfull")
+                logSignup.debug(SignUp_SuccessText)
             else:
                 XLUtils.writeData(path, "Sheet1", r, 6, "Signup Failed")
+                logSignup.debug("Sign Up Failed")
 
             SignUp_Object.HomePageRedirection().click()
             SignUp_Object.SignUpInsideLoop().click()
